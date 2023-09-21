@@ -1,8 +1,11 @@
-struct Matcher {
+pub struct Matcher {
   pattern: String,
 }
 
 impl Matcher {
+  pub fn new(pattern: String) -> Self {
+    return Matcher { pattern }
+  }
   pub fn is_match(&self, s: String) -> bool {
     let mut i = 0;
     for character in self.pattern.chars() {
@@ -18,6 +21,7 @@ impl Matcher {
           match s.chars().nth(i) {
             Some(userChar) => {
               if userChar == character {
+                i += 1;
                 continue;
               }
               return false;
@@ -30,6 +34,6 @@ impl Matcher {
       }
     }
 
-    return true;
+    return i == s.len()
   }
 }
